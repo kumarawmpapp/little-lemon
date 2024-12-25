@@ -27,21 +27,22 @@ const CompanyDescription =
 
 const styles = StyleSheet.create({
     heroSection: {
-        backgroundColor: "#495e57",
+        backgroundColor: Colors.primary1,
         padding: 15,
       },
       heroHeader: {
-        fontFamily: "MarkaziText-Regular",
+        fontFamily: Fonts.Markazi,
         color: Colors.primary2,
         fontSize: 54,
       },
       heroHeader2: {
-        color: "#fff",
+        color: Colors.secondary3,
         fontSize: 30,
       },
       heroText: {
-        color: "#fff",
-        fontSize: 14,
+        color: Colors.secondary3,
+        fontSize: 20,
+        paddingVertical: 20
       },
       heroBody: {
         flexDirection: "row",
@@ -51,9 +52,10 @@ const styles = StyleSheet.create({
         flex: 1,
       },
       heroImage: {
-        width: 100,
-        height: 100,
+        width: 150,
+        height: 150,
         borderRadius: 12,
+        padding: 10,
       },
     });
 
