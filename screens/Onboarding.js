@@ -14,6 +14,8 @@ import { validateEmail, validateName } from "../utils";
 import Constants from "expo-constants";
 
 import { AuthContext } from "../contexts/AuthContext";
+import CompanyDescription from "../components/CompanyDescription";
+import { Colors } from "../theme";
 
 const Onboarding = () => {
   const [firstName, onChangeFirstName] = useState("");
@@ -22,7 +24,8 @@ const Onboarding = () => {
 
   const isEmailValid = validateEmail(email);
   const isFirstNameValid = validateName(firstName);
-  const isLastNameValid = validateName(lastName);
+
+  const isSubmitEnabled = isFirstNameValid && isEmailValid;
 
   const { onboard } = useContext(AuthContext);
 
@@ -40,10 +43,12 @@ const Onboarding = () => {
           accessibilityLabel={"Little Lemon Logo"}
         />
       </View>
-      <Text style={styles.welcomeText}>Let us get to know you</Text>
+      
       <ScrollView
-        style={styles.viewPager}
+        style={styles.scrollView}
       >
+        <CompanyDescription>      <Text style={styles.welcomeText}>Let us get to know you</Text>
+        </CompanyDescription>
         <View style={styles.page} key="1">
           <View style={styles.pageContainer}>
             <Text style={styles.text}>First Name</Text>
@@ -54,7 +59,7 @@ const Onboarding = () => {
               placeholder={"First Name"}
             />
           </View>
-         
+
         </View>
         <View style={styles.page} key="2">
           <View style={styles.pageContainer}>
@@ -66,8 +71,8 @@ const Onboarding = () => {
               placeholder={"Last Name"}
             />
           </View>
-          
-         
+
+
         </View>
         <View style={styles.page} key="3">
           <View style={styles.pageContainer}>
@@ -80,13 +85,13 @@ const Onboarding = () => {
               keyboardType="email-address"
             />
           </View>
-        
+
           <View style={styles.buttons}>
-           
+
             <Pressable
-              style={[styles.halfBtn, isEmailValid ? "" : styles.btnDisabled]}
+              style={[styles.halfBtn, isSubmitEnabled ? "" : styles.btnDisabled]}
               onPress={() => onboard({ firstName, lastName, email })}
-              disabled={!isEmailValid}
+              disabled={!isSubmitEnabled}
             >
               <Text style={styles.btntext}>Next</Text>
             </Pressable>
@@ -96,6 +101,7 @@ const Onboarding = () => {
     </KeyboardAvoidingView>
   );
 };
+
 
 const styles = StyleSheet.create({
   container: {
@@ -114,7 +120,7 @@ const styles = StyleSheet.create({
     width: 150,
     resizeMode: "contain",
   },
-  viewPager: {
+  scrollView: {
     flex: 1
   },
   page: {
@@ -127,8 +133,7 @@ const styles = StyleSheet.create({
   },
   welcomeText: {
     fontSize: 40,
-    paddingVertical: 60,
-    color: "#495E57",
+    color: Colors.secondary3,
     textAlign: "center",
   },
   text: {
@@ -160,19 +165,21 @@ const styles = StyleSheet.create({
     backgroundColor: "#f1f4f7",
   },
   buttons: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginLeft: 18,
-    marginBottom: 60,
+
+    // display: "flex",
+    // flexDirection: "row",
+    // justifyContent: "space-between",
+    // alignItems: "center",
+    // marginLeft: 18,
+    // marginBottom: 60,
   },
   halfBtn: {
-    flex: 1,
+    // flex: 1,
+    alignItems: "flex-end",
     borderColor: "#f4ce14",
     backgroundColor: "#f4ce14",
     borderRadius: 9,
-    alignSelf: "stretch",
+    // alignSelf: "stretch",
     marginRight: 18,
     padding: 10,
     borderWidth: 1,

@@ -19,6 +19,7 @@ import Filters from "../components/Filters";
 import { getSectionListData, useUpdateEffect } from "../utils/utils";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import debounce from "lodash.debounce";
+import CompanyDescription from "../components/CompanyDescription";
 
 const API_URL =
   "https://raw.githubusercontent.com/Meta-Mobile-Developer-PC/Working-With-Data-API/main/capstone.json";
@@ -161,23 +162,7 @@ const Home = ({ navigation }) => {
           )}
         </Pressable>
       </View>
-      <View style={styles.heroSection}>
-        <Text style={styles.heroHeader}>Little Lemon</Text>
-        <View style={styles.heroBody}>
-          <View style={styles.heroContent}>
-            <Text style={styles.heroHeader2}>Chicago</Text>
-            <Text style={styles.heroText}>
-              We are a family owned Mediterranean restaurant, focused on
-              traditional recipes served with a modern twist.
-            </Text>
-          </View>
-          <Image
-            style={styles.heroImage}
-            source={require("../assets/Hero image.png")}
-            accessible={true}
-            accessibilityLabel={"Little Lemon Food"}
-          />
-        </View>
+      <CompanyDescription>
         <Searchbar
           placeholder="Search"
           placeholderTextColor="#333333"
@@ -186,9 +171,8 @@ const Home = ({ navigation }) => {
           style={styles.searchBar}
           iconColor="#333333"
           inputStyle={{ color: "#333333" }}
-          elevation={0}
-        />
-      </View>
+          elevation={0} />
+      </CompanyDescription>
       <Text style={styles.delivery}>ORDER FOR DELIVERY!</Text>
       <Filters
         selections={filterSelections}
@@ -297,36 +281,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  heroSection: {
-    backgroundColor: "#495e57",
-    padding: 15,
-  },
-  heroHeader: {
-    color: "#f4ce14",
-    fontSize: 54,
-  },
-  heroHeader2: {
-    color: "#fff",
-    fontSize: 30,
-  },
-  heroText: {
-    color: "#fff",
-    fontSize: 14,
-  },
-  heroBody: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-  },
-  heroContent: {
-    flex: 1,
-  },
-  heroImage: {
-    width: 100,
-    height: 100,
-    borderRadius: 12,
-  },
   delivery: {
     fontSize: 18,
     padding: 15,
   },
 });
+
+
