@@ -17,7 +17,7 @@ import {
 import { Searchbar } from "react-native-paper";
 import Filters from "../components/Filters";
 import { getSectionListData, useUpdateEffect } from "../utils/utils";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+
 import debounce from "lodash.debounce";
 import CompanyDescription from "../components/CompanyDescription";
 
