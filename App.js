@@ -9,19 +9,7 @@ import LogoTitle from "./components/Title";
 import { AuthContext } from "./contexts/AuthContext";
 import { Colors } from "./theme";
 
-const Stack = createNativeStackNavigator({
-
-  screenOptions: 
-
-  {
-    headerStyle: {
-      backgroundColor: Colors.secondary3,
-    },
-    headerTintColor: Colors.secondary4,    
-    headerTitle: (props) => <LogoTitle {...props}/>,
-  }
-  
-});
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   const [state, dispatch] = useReducer(
@@ -99,7 +87,15 @@ export default function App() {
   return (
     <AuthContext.Provider value={authContext}>
       <NavigationContainer>
-        <Stack.Navigator>
+        <Stack.Navigator screenOptions = 
+
+{{
+  headerStyle: {
+    backgroundColor: Colors.secondary3,
+  },
+  headerTintColor: Colors.secondary4,    
+  headerTitle: (props) => <LogoTitle {...props}/>,
+}}>
           {state.isOnboardingCompleted ? (
             <>
               <Stack.Screen

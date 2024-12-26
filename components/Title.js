@@ -15,12 +15,8 @@ const LogoTitle = () => {
 
 const styles = StyleSheet.create({
   header: {
-    backgroundColor: "#dee3e9",
-    paddingTop: Constants.statusBarHeight,
-    height: 80
   },
   logo: {
-    height: 50,
     width: 150,
     resizeMode: "contain",
   }
