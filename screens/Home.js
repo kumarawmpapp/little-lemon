@@ -146,21 +146,7 @@ const Home = ({ navigation }) => {
           accessible={true}
           accessibilityLabel={"Little Lemon Logo"}
         />
-        <Pressable
-          style={styles.avatar}
-          onPress={() => navigation.navigate("Profile")}
-        >
-          {profile.image !== "" ? (
-            <Image source={{ uri: profile.image }} style={styles.avatarImage} />
-          ) : (
-            <View style={styles.avatarEmpty}>
-              <Text style={styles.avatarEmptyText}>
-                {profile.firstName && Array.from(profile.firstName)[0]}
-                {profile.lastName && Array.from(profile.lastName)[0]}
-              </Text>
-            </View>
-          )}
-        </Pressable>
+        {ProfileAvatar(navigation, profile)}
       </View>
       <CompanyDescription>
         <Searchbar
@@ -287,4 +273,22 @@ const styles = StyleSheet.create({
   },
 });
 
+
+function ProfileAvatar(navigation, profile) {
+  return <Pressable
+    style={styles.avatar}
+    onPress={() => navigation.navigate("Profile")}
+  >
+    {profile.image !== "" ? (
+      <Image source={{ uri: profile.image }} style={styles.avatarImage} />
+    ) : (
+      <View style={styles.avatarEmpty}>
+        <Text style={styles.avatarEmptyText}>
+          {profile.firstName && Array.from(profile.firstName)[0]}
+          {profile.lastName && Array.from(profile.lastName)[0]}
+        </Text>
+      </View>
+    )}
+  </Pressable>;
+}
 
