@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
   header: {
   },
   logo: {
-    width: 150,
+    // width: 150,
     resizeMode: "contain",
   }
 });

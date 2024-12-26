@@ -8,6 +8,7 @@ import {
   Image,
   Pressable,
 } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Colors } from "../theme";
 
 const ProfileAvatar = ({onPress}) => {
