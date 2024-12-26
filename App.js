@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useReducer, useCallback } from "react";
-import { NavigationContainer } from "@react-navigation/native";
+import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Onboarding from "./screens/Onboarding";
@@ -8,6 +8,9 @@ import Home from "./screens/Home";
 import LogoTitle from "./components/Title";
 import { AuthContext } from "./contexts/AuthContext";
 import { Colors } from "./theme";
+
+const navTheme = DefaultTheme;
+navTheme.colors.background = Colors.secondary3;
 
 const Stack = createNativeStackNavigator();
 
@@ -86,7 +89,7 @@ export default function App() {
 
   return (
     <AuthContext.Provider value={authContext}>
-      <NavigationContainer>
+      <NavigationContainer theme={navTheme}>
         <Stack.Navigator screenOptions = 
 
 {{

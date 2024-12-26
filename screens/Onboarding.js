@@ -99,7 +99,6 @@ const Onboarding = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
     // paddingTop: Constants.statusBarHeight,
   },
   scrollView: {
@@ -125,7 +124,8 @@ const styles = StyleSheet.create({
     color: Colors.secondary1,
   },
   inputBox: {
-    borderColor: "#EDEFEE",
+    borderColor: Colors.secondary1,
+    backgroundColor: "#FFF",
     alignSelf: "stretch",
     height: 50,
     marginTop: 5,
@@ -149,12 +149,11 @@ const styles = StyleSheet.create({
   },
   buttons: {
 
-    // display: "flex",
-    // flexDirection: "row",
-    // justifyContent: "space-between",
-    // alignItems: "center",
-    // marginLeft: 18,
-    // marginBottom: 60,
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "flex-end",
+    marginLeft: 18,
+    marginBottom: 60,
   },
   halfBtn: {
     // flex: 1,
@@ -165,7 +164,9 @@ const styles = StyleSheet.create({
     borderRadius: 9,
     // alignSelf: "stretch",
     marginRight: 18,
+    marginTop: 20,
     padding: 10,
+    paddingHorizontal: 20,
     borderWidth: 1,
   },
   btntext: {
