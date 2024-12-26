@@ -20,7 +20,8 @@ import { getSectionListData, useUpdateEffect } from "../utils/utils";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import debounce from "lodash.debounce";
 import CompanyDescription from "../components/CompanyDescription";
-import { Colors } from "../theme";
+
+import ProfileAvatar from '../components/ProfileAvatar';
 
 const API_URL =
   "https://raw.githubusercontent.com/Meta-Mobile-Developer-PC/Working-With-Data-API/main/capstone.json";
@@ -236,19 +237,7 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
   },
-  avatar: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-  },
-  avatarImage: {
-    resizeMode: "contain"
-  },
-  avatarEmpty: {
-    backgroundColor: Colors.secondary4,
-    alignItems: "center",
-    justifyContent: "center",
-  },
+  
   delivery: {
     fontSize: 18,
     padding: 15,
@@ -256,45 +245,5 @@ const styles = StyleSheet.create({
 });
 
 
-const ProfileAvatar = ({onPress}) => {
-  const [profile, setProfile] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    phoneNumber: "",
-    orderStatuses: false,
-    passwordChanges: false,
-    specialOffers: false,
-    newsletter: false,
-    image: "",
-  });
 
-  useEffect(() => {
-    (async () => {
-      
-      try {
-        const getProfile = await AsyncStorage.getItem("profile");
-        setProfile(JSON.parse(getProfile));
-      } catch (e) {
-        Alert.alert(e.message);
-      }
-    })();
-  }, []);
-
-  return <Pressable
-    style={styles.avatar}
-    onPress={onPress}
-  >
-    {profile.image !== "" ? (
-      <Image source={{ uri: profile.image }} style={styles.avatarImage} />
-    ) : (
-      <View style={styles.avatarEmpty}>
-        <Text style={styles.avatarEmptyText}>
-          {profile.firstName && profile.firstName.charAt(0)}
-          {profile.lastName && profile.lastName.charAt(0)}
-        </Text>
-      </View>
-    )}
-  </Pressable>;
-};
 
