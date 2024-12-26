@@ -35,14 +35,7 @@ const Onboarding = () => {
       style={styles.container}
       behavior={Platform.OS === "ios" ? "padding" : "height"}
     >
-      <View style={styles.header}>
-        <Image
-          style={styles.logo}
-          source={require("../assets/Logo.png")}
-          accessible={true}
-          accessibilityLabel={"Little Lemon Logo"}
-        />
-      </View>
+      
       
       <ScrollView
         style={styles.scrollView}
@@ -107,18 +100,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    paddingTop: Constants.statusBarHeight,
-  },
-  header: {
-    padding: 12,
-    flexDirection: "row",
-    justifyContent: "center",
-    backgroundColor: "#dee3e9",
-  },
-  logo: {
-    height: 50,
-    width: 150,
-    resizeMode: "contain",
+    // paddingTop: Constants.statusBarHeight,
   },
   scrollView: {
     flex: 1

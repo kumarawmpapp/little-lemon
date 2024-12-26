@@ -5,9 +5,24 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import Onboarding from "./screens/Onboarding";
 import Profile from "./screens/Profile";
 import Home from "./screens/Home";
+import LogoTitle from "./components/Title";
 import { AuthContext } from "./contexts/AuthContext";
+import { Colors } from "./theme";
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator({
+
+  headerMode:"screen" ,
+  screenOptions: 
+
+  {
+    headerStyle: {
+      backgroundColor: Colors.secondary3,
+    },
+    headerTintColor: Colors.secondary4,    
+    headerTitle: (props) => <LogoTitle {...props}/>,
+  }
+  
+});
 
 export default function App({ navigation }) {
   const [state, dispatch] = useReducer(
@@ -91,7 +106,6 @@ export default function App({ navigation }) {
               <Stack.Screen
                 name="Home"
                 component={Home}
-                options={{ headerShown: false }}
               />
               <Stack.Screen name="Profile" component={Profile} />
             </>
@@ -99,7 +113,6 @@ export default function App({ navigation }) {
             <Stack.Screen
               name="Onboarding"
               component={Onboarding}
-              options={{ headerShown: false }}
             />
           )}
         </Stack.Navigator>
