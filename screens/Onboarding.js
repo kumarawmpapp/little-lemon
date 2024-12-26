@@ -42,9 +42,9 @@ const Onboarding = () => {
       >
         <CompanyDescription>      <Text style={styles.welcomeText}>Let us get to know you</Text>
         </CompanyDescription>
-        <View style={styles.page} key="1">
+        
           <View style={styles.pageContainer}>
-            <Text style={styles.text}>First Name</Text>
+            <Text style={styles.text}>First Name*</Text>
             <TextInput
               style={styles.inputBox}
               value={firstName}
@@ -53,8 +53,8 @@ const Onboarding = () => {
             />
           </View>
 
-        </View>
-        <View style={styles.page} key="2">
+
+       
           <View style={styles.pageContainer}>
             <Text style={styles.text}>Last Name</Text>
             <TextInput
@@ -66,10 +66,10 @@ const Onboarding = () => {
           </View>
 
 
-        </View>
-        <View style={styles.page} key="3">
+
+       
           <View style={styles.pageContainer}>
-            <Text style={styles.text}>Email</Text>
+            <Text style={styles.text}>Email*</Text>
             <TextInput
               style={styles.inputBox}
               value={email}
@@ -89,7 +89,7 @@ const Onboarding = () => {
               <Text style={styles.btntext}>Next</Text>
             </Pressable>
           </View>
-        </View>
+
       </ScrollView>
     </KeyboardAvoidingView>
   );
@@ -109,25 +109,26 @@ const styles = StyleSheet.create({
     //justifyContent: "center",
   },
   pageContainer: {
+    paddingTop:20,
+    paddingHorizontal: 20
     // flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    // justifyContent: "center",
+    // alignItems: "center",
   },
   welcomeText: {
-    fontSize: 40,
+    fontSize: 30,
     color: Colors.secondary3,
-    textAlign: "center",
   },
   text: {
     fontSize: 24,
-    color: "#495E57",
+    fontWeight: "bold",
+    color: Colors.secondary1,
   },
   inputBox: {
     borderColor: "#EDEFEE",
-    backgroundColor: "#EDEFEE",
     alignSelf: "stretch",
     height: 50,
-    margin: 18,
+    marginTop: 5,
     borderWidth: 1,
     padding: 10,
     fontSize: 20,
@@ -157,6 +158,7 @@ const styles = StyleSheet.create({
   },
   halfBtn: {
     // flex: 1,
+    justifyContent: "flex-end",
     alignItems: "flex-end",
     borderColor: "#f4ce14",
     backgroundColor: "#f4ce14",

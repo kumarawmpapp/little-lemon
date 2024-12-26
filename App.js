@@ -11,7 +11,6 @@ import { Colors } from "./theme";
 
 const Stack = createNativeStackNavigator({
 
-  headerMode:"screen" ,
   screenOptions: 
 
   {
@@ -24,7 +23,7 @@ const Stack = createNativeStackNavigator({
   
 });
 
-export default function App({ navigation }) {
+export default function App() {
   const [state, dispatch] = useReducer(
     (prevState, action) => {
       switch (action.type) {

@@ -3,7 +3,7 @@ import { Colors, Fonts } from "../theme";
 
 
 const CompanyDescription = 
-(props) => {
+({children}) => {
   return <View style={styles.heroSection}>
     <Text style={styles.heroHeader}>Little Lemon</Text>
     <View style={styles.heroBody}>
@@ -20,7 +20,7 @@ const CompanyDescription =
         accessible={true}
         accessibilityLabel={"Little Lemon Food"} />
     </View>
-    {props.children}
+    {children}
 
   </View>;
 };
