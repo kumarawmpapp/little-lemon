@@ -20,6 +20,7 @@ import { getSectionListData, useUpdateEffect } from "../utils/utils";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import debounce from "lodash.debounce";
 import CompanyDescription from "../components/CompanyDescription";
+import { Colors } from "../theme";
 
 const API_URL =
   "https://raw.githubusercontent.com/Meta-Mobile-Developer-PC/Working-With-Data-API/main/capstone.json";
@@ -43,17 +44,7 @@ const Item = ({ name, price, description, image }) => (
 );
 
 const Home = ({ navigation }) => {
-  const [profile, setProfile] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    phoneNumber: "",
-    orderStatuses: false,
-    passwordChanges: false,
-    specialOffers: false,
-    newsletter: false,
-    image: "",
-  });
+  
   const [data, setData] = useState([]);
   const [searchBarText, setSearchBarText] = useState("");
   const [query, setQuery] = useState("");
@@ -91,12 +82,18 @@ const Home = ({ navigation }) => {
         }
         const sectionListData = getSectionListData(menuItems);
         setData(sectionListData);
-        const getProfile = await AsyncStorage.getItem("profile");
-        setProfile(JSON.parse(getProfile));
       } catch (e) {
         Alert.alert(e.message);
       }
     })();
+  }, []);
+
+  useEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <ProfileAvatar onPress={() => navigation.navigate("Profile")}/>
+      ),
+    });
   }, []);
 
   useUpdateEffect(() => {
@@ -139,15 +136,6 @@ const Home = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <Image
-          style={styles.logo}
-          source={require("../assets/Logo.png")}
-          accessible={true}
-          accessibilityLabel={"Little Lemon Logo"}
-        />
-        {ProfileAvatar(navigation, profile)}
-      </View>
       <CompanyDescription>
         <Searchbar
           placeholder="Search"
@@ -249,21 +237,15 @@ const styles = StyleSheet.create({
     height: 100,
   },
   avatar: {
-    flex: 1,
-    position: "absolute",
-    right: 10,
-    top: 10,
+    width: 50,
+    height: 50,
+    borderRadius: 25,
   },
   avatarImage: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
+    resizeMode: "contain"
   },
   avatarEmpty: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-    backgroundColor: "#0b9a6a",
+    backgroundColor: Colors.secondary4,
     alignItems: "center",
     justifyContent: "center",
   },
@@ -274,21 +256,45 @@ const styles = StyleSheet.create({
 });
 
 
-function ProfileAvatar(navigation, profile) {
+const ProfileAvatar = ({onPress}) => {
+  const [profile, setProfile] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phoneNumber: "",
+    orderStatuses: false,
+    passwordChanges: false,
+    specialOffers: false,
+    newsletter: false,
+    image: "",
+  });
+
+  useEffect(() => {
+    (async () => {
+      
+      try {
+        const getProfile = await AsyncStorage.getItem("profile");
+        setProfile(JSON.parse(getProfile));
+      } catch (e) {
+        Alert.alert(e.message);
+      }
+    })();
+  }, []);
+
   return <Pressable
     style={styles.avatar}
-    onPress={() => navigation.navigate("Profile")}
+    onPress={onPress}
   >
     {profile.image !== "" ? (
       <Image source={{ uri: profile.image }} style={styles.avatarImage} />
     ) : (
       <View style={styles.avatarEmpty}>
         <Text style={styles.avatarEmptyText}>
-          {profile.firstName && Array.from(profile.firstName)[0]}
-          {profile.lastName && Array.from(profile.lastName)[0]}
+          {profile.firstName && profile.firstName.charAt(0)}
+          {profile.lastName && profile.lastName.charAt(0)}
         </Text>
       </View>
     )}
   </Pressable>;
-}
+};
 
