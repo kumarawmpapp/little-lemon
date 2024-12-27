@@ -95,7 +95,7 @@ const Home = ({ navigation }) => {
         <ProfileAvatar onPress={() => navigation.push("Profile")}/>
       ),
     });
-  }, []);
+  }, [navigation]);
 
   useUpdateEffect(() => {
     (async () => {
