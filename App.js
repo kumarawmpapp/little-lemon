@@ -98,7 +98,8 @@ export default function App() {
     height: 150
   },
   headerTintColor: Colors.secondary4,    
-  headerTitle: (props) => <LogoTitle {...props}/>,
+  // headerTitle: (props) => <LogoTitle {...props}/>,
+  header: (props) => <LogoTitle {...props}/>,
 }}>
           {state.isOnboardingCompleted ? (
             <>

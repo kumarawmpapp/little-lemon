@@ -55,9 +55,9 @@ const styles = StyleSheet.create({
     display: "flex"
   },
   circle: {
-    width: 30,
-    height: 30,
-    borderRadius: 15,
+    width: 50,
+    height: 50,
+    borderRadius: 25,
   },
   avatarImage: {
     resizeMode: "contain",
