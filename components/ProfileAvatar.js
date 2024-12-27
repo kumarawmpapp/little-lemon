@@ -28,21 +28,23 @@ const ProfileAvatar = ({ onPress }) => {
   }, []);
 
   return (
-    <Pressable onPress={onPress}>
-    <View style={[styles.avatar, styles.circle]}>
-      
+    <Pressable
+      onPress={() => {
+        onPress();
+      }}
+    >
+      <View style={[styles.avatar, styles.circle]}>
         {profile.image !== "" ? (
           <Image source={{ uri: profile.image }} style={styles.avatarImage} />
         ) : (
           // <View style={[styles.avatarEmpty]}>
-            <Text style={styles.avatarEmptyText}>
-               {profile.firstName && Array.from(profile.firstName)[0]}
-               {profile.lastName && Array.from(profile.lastName)[0]}
-            </Text>
+          <Text style={styles.avatarEmptyText}>
+            {profile.firstName && Array.from(profile.firstName)[0]}
+            {profile.lastName && Array.from(profile.lastName)[0]}
+          </Text>
           // </View>
         )}
-      
-    </View>
+      </View>
     </Pressable>
   );
 };
@@ -52,7 +54,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.primary1,
     alignItems: "center",
     justifyContent: "center",
-    display: "flex"
+    display: "flex",
   },
   circle: {
     width: 50,
