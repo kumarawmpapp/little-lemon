@@ -92,7 +92,7 @@ const Home = ({ navigation }) => {
   useEffect(() => {
     navigation.setOptions({
       headerRight: () => (
-        <ProfileAvatar onPress={() => navigation.navigate("Profile")}/>
+        <ProfileAvatar onPress={() => navigation.push("Profile")}/>
       ),
     });
   }, []);
