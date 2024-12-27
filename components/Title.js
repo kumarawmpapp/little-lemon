@@ -59,12 +59,13 @@ const LogoTitle = (props) => {
 
 const styles = StyleSheet.create({
   header: {
-    height: 150,
-    paddingTop: Constants.statusBarHeight,
+    padding: 10,
+    marginTop: Constants.statusBarHeight,
     paddingHorizontal: 20,
     justifyContent: "space-between",
     alignItems: "center",
     flexDirection: "row",
+    backgroundColor: Colors.secondary3
   },
   logo: {
     // width: 150,
