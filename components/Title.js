@@ -15,6 +15,7 @@ const LogoTitle = () => {
 
 const styles = StyleSheet.create({
   header: {
+    height: 200
   },
   logo: {
     // width: 150,
