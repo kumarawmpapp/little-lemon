@@ -103,7 +103,7 @@ export default function App() {
   headerTitle: (props) => <TitleImage/>,
   // header: (props) => <LogoTitle {...props}/>,
   headerBackButtonDisplayMode: "minimal",
-  headerBackImageSource: require("./assets/back-icon.png"),
+  // headerBackImageSource: require("./assets/back-icon.png"),
 }}>
           {state.isOnboardingCompleted ? (
             <>

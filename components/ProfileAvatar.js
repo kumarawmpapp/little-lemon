@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   avatarEmptyText: {
-    fontSize: 32,
+    fontSize: 20,
     color: "#FFF",
     fontWeight: "bold",
   },
