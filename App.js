@@ -7,10 +7,12 @@ import Profile from "./screens/Profile";
 import Home from "./screens/Home";
 import LogoTitle from "./components/Title";
 import { AuthContext } from "./contexts/AuthContext";
-import { Colors } from "./theme";
+import { Colors, Fonts } from "./theme";
 
 const navTheme = DefaultTheme;
 navTheme.colors.background = Colors.secondary3;
+navTheme.colors.card = Colors.secondary3;
+navTheme.fonts.regular.fontFamily = Fonts.Karla;
 
 const Stack = createNativeStackNavigator();
 
