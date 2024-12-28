@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useLayoutEffect, useState } from "react";
 import { Image, StyleSheet, View, Text, Pressable } from "react-native";
 import Constants from "expo-constants";
 import { Colors } from "../theme";
@@ -8,7 +8,7 @@ const LogoTitle = (props) => {
   // const [rightButton, setRightButton] = useState();
   let rightButton = null;
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (props.navigation.canGoBack()) 
       backButton =
       <Pressable onPress={props.navigation.goBack()}>

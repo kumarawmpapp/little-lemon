@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback, useMemo } from "react";
+import { useEffect, useLayoutEffect, useState, useCallback, useMemo } from "react";
 import {
   Text,
   View,
@@ -89,10 +89,10 @@ const Home = ({ navigation }) => {
     })();
   }, []);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
-        <ProfileAvatar onPress={() => navigation.push("Profile")}/>
+        <ProfileAvatar onPress={() => navigation.navigate("Profile")}/>
       ),
     });
   }, [navigation]);
