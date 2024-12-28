@@ -5,7 +5,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import Onboarding from "./screens/Onboarding";
 import Profile from "./screens/Profile";
 import Home from "./screens/Home";
-import LogoTitle from "./components/Title";
+import LogoTitle, { BackIcon, TitleImage } from "./components/Title";
 import { AuthContext } from "./contexts/AuthContext";
 import { Colors, Fonts } from "./theme";
 
@@ -97,11 +97,13 @@ export default function App() {
 {{
   headerStyle: {
     backgroundColor: Colors.secondary3,
-    height: 150
+    height: 100
   },
-  headerTintColor: Colors.secondary4,    
-  // headerTitle: (props) => <LogoTitle {...props}/>,
-  header: (props) => <LogoTitle {...props}/>,
+  headerTintColor: Colors.primary1,    
+  headerTitle: (props) => <TitleImage/>,
+  // header: (props) => <LogoTitle {...props}/>,
+  headerBackButtonDisplayMode: "minimal",
+  headerBackImageSource: require("./assets/back-icon.png"),
 }}>
           {state.isOnboardingCompleted ? (
             <>

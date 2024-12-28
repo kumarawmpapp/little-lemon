@@ -12,20 +12,7 @@ const LogoTitle = (props) => {
     if (props.navigation.canGoBack()) 
       backButton =
       <Pressable onPress={props.navigation.goBack()}>
-        <View
-          style={{
-            height: 40,
-            width: 40,
-            borderRadius: 20,
-            backgroundColor: Colors.primary1,
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <Text style={{ color: "#FFF", fontSize: 25, fontWeight: "700" }}>
-            ←
-          </Text>
-        </View>
+        <BackIcon />
       </Pressable>;
   }, [props.back]);
 
@@ -46,12 +33,7 @@ const LogoTitle = (props) => {
     <View style={styles.header}>
       {backButton}
 
-      <Image
-        style={styles.logo}
-        source={require("../assets/Logo.png")}
-        accessible={true}
-        accessibilityLabel="Little Lemon Logo"
-      />
+      <TitleImage />
       {rightButton}
     </View>
   );
@@ -74,3 +56,28 @@ const styles = StyleSheet.create({
 });
 
 export default LogoTitle;
+
+export function TitleImage() {
+  return <Image
+    style={styles.logo}
+    source={require("../assets/Logo.png")}
+    accessible={true}
+    accessibilityLabel="Little Lemon Logo" />;
+}
+
+export function BackIcon() {
+  return <View
+    style={{
+      height: 40,
+      width: 40,
+      borderRadius: 20,
+      backgroundColor: Colors.primary1,
+      justifyContent: "center",
+      alignItems: "center",
+    }}
+  >
+    <Text style={{ color: "#FFF", fontSize: 25, fontWeight: "700" }}>
+      ←
+    </Text>
+  </View>;
+}
