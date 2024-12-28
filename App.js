@@ -97,7 +97,8 @@ export default function App() {
 {{
   headerStyle: {
     backgroundColor: Colors.secondary3,
-    height: 100
+    height: 100,
+    
   },
   headerTintColor: Colors.primary1,    
   headerTitle: (props) => <TitleImage/>,
