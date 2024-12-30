@@ -14,6 +14,7 @@ import {
   saveMenuItems,
   filterByQueryAndCategories,
 } from "../database";
+import { SQLiteDatabase, SQLiteProvider, useSQLiteContext } from 'expo-sqlite';
 import { Searchbar } from "react-native-paper";
 import Filters from "../components/Filters";
 import { getSectionListData, useUpdateEffect } from "../utils/utils";
@@ -52,6 +53,7 @@ const Home = ({ navigation }) => {
   const [filterSelections, setFilterSelections] = useState(
     sections.map(() => false)
   );
+  const db = useSQLiteContext();
 
   const fetchData = async () => {
     try {
@@ -75,15 +77,26 @@ const Home = ({ navigation }) => {
     (async () => {
       let menuItems = [];
       try {
-        await createTable();
-        menuItems = await getMenuItems();
+        const result = await db.prepareAsync("select * from menuitems");
+        
+        menuItems =  result;
         if (!menuItems.length) {
           menuItems = await fetchData();
-          saveMenuItems(menuItems);
+          
+          await db.prepareAsync(
+            `insert into menuitems (id, name, price, description, image, category) values ${menuItems
+              .map(
+                item =>
+                  `("${item.id}", "${item.name}", "${item.price.toString()}", "${item.description}", "${item.image}", "${item.category}")`
+              )
+              .join(", ")}`
+         );
         }
         const sectionListData = getSectionListData(menuItems);
         setData(sectionListData);
       } catch (e) {
+        console.log(e);
+        
         Alert.alert(e.message);
       }
     })();
@@ -135,8 +148,11 @@ const Home = ({ navigation }) => {
     setFilterSelections(arrayCopy);
   };
 
+  
+
   return (
     <View style={styles.container}>
+
       <CompanyDescription>
         <Searchbar
           placeholder="Search"

@@ -2,6 +2,7 @@ import { useEffect, useMemo, useReducer, useCallback } from "react";
 import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { SQLiteDatabase, SQLiteProvider, useSQLiteContext } from 'expo-sqlite';
 import Onboarding from "./screens/Onboarding";
 import Profile from "./screens/Profile";
 import Home from "./screens/Home";
@@ -89,8 +90,13 @@ export default function App() {
     []
   );
 
+  const createDbIfNeeded = async (db) => {
+    await db.execAsync("create table if not exists menuitems (id integer primary key not null, name text, price text, description text, image text, category text);");
+  };
+
   return (
     <AuthContext.Provider value={authContext}>
+            <SQLiteProvider databaseName="little_lemon.db" onInit={createDbIfNeeded}>
       <NavigationContainer theme={navTheme}>
         <Stack.Navigator screenOptions = 
 
@@ -122,6 +128,7 @@ export default function App() {
           )}
         </Stack.Navigator>
       </NavigationContainer>
+      </SQLiteProvider>
     </AuthContext.Provider>
   );
 }

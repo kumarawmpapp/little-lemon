@@ -1,8 +1,6 @@
-import * as SQLite from "expo-sqlite";
+import { useSQLiteContext } from "expo-sqlite";
 
-const db = SQLite.openDatabaseAsync("little_lemon");
-
-export async function createTable() {
+export async function createTable(db) {
   return new Promise((resolve, reject) => {
     db.transaction(
       tx => {
