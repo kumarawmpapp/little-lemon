@@ -77,7 +77,7 @@ const Home = ({ navigation }) => {
     (async () => {
       let menuItems = [];
       try {
-        const result = await db.prepareAsync("select * from menuitems");
+        const result = await db.getAllAsync("select * from menuitems");
         
         menuItems =  result;
         if (!menuItems.length) {
