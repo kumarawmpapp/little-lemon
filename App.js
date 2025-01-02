@@ -105,7 +105,6 @@ export default function App({ navigation }) {
               <Stack.Screen
                 name="Home"
                 component={Home}
-                options={{ headerShown: false }}
               />
               <Stack.Screen name="Profile" component={Profile} />
             </>
