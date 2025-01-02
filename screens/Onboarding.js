@@ -8,12 +8,14 @@ import {
   Platform,
   TextInput,
   Pressable,
+  ScrollView,
 } from "react-native";
-import PagerView from "react-native-pager-view";
 import { validateEmail, validateName } from "../utils";
 import Constants from "expo-constants";
 
 import { AuthContext } from "../contexts/AuthContext";
+import CompanyDescription from "../components/CompanyDescription";
+import { Colors } from "../theme";
 
 const Onboarding = () => {
   const [firstName, onChangeFirstName] = useState("");
@@ -22,122 +24,62 @@ const Onboarding = () => {
 
   const isEmailValid = validateEmail(email);
   const isFirstNameValid = validateName(firstName);
-  const isLastNameValid = validateName(lastName);
-  const viewPagerRef = useRef(PagerView);
+
+  const isSubmitEnabled = isFirstNameValid && isEmailValid;
 
   const { onboard } = useContext(AuthContext);
-
 
   return (
     <KeyboardAvoidingView
       style={styles.container}
       behavior={Platform.OS === "ios" ? "padding" : "height"}
     >
-      <View style={styles.header}>
-        <Image
-          style={styles.logo}
-          source={require("../assets/Logo.png")}
-          accessible={true}
-          accessibilityLabel={"Little Lemon Logo"}
-        />
-      </View>
-      <Text style={styles.welcomeText}>Let us get to know you</Text>
-      <PagerView
-        style={styles.viewPager}
-        scrollEnabled={false}
-        initialPage={0}
-        ref={viewPagerRef}
-      >
-        <View style={styles.page} key="1">
-          <View style={styles.pageContainer}>
-            <Text style={styles.text}>First Name</Text>
-            <TextInput
-              style={styles.inputBox}
-              value={firstName}
-              onChangeText={onChangeFirstName}
-              placeholder={"First Name"}
-            />
-          </View>
-          <View style={styles.pageIndicator}>
-            <View style={[styles.pageDot, styles.pageDotActive]}></View>
-            <View style={styles.pageDot}></View>
-            <View style={styles.pageDot}></View>
-          </View>
+      <ScrollView style={styles.scrollView}>
+        <CompanyDescription>
+          <Text style={styles.welcomeText}>Let us get to know you</Text>
+        </CompanyDescription>
+
+        <View style={styles.pageContainer}>
+          <Text style={styles.text}>First Name*</Text>
+          <TextInput
+            style={styles.inputBox}
+            value={firstName}
+            onChangeText={onChangeFirstName}
+            placeholder={"First Name"}
+          />
+        </View>
+
+        <View style={styles.pageContainer}>
+          <Text style={styles.text}>Last Name</Text>
+          <TextInput
+            style={styles.inputBox}
+            value={lastName}
+            onChangeText={onChangeLastName}
+            placeholder={"Last Name"}
+          />
+        </View>
+
+        <View style={styles.pageContainer}>
+          <Text style={styles.text}>Email*</Text>
+          <TextInput
+            style={styles.inputBox}
+            value={email}
+            onChangeText={onChangeEmail}
+            placeholder={"Email"}
+            keyboardType="email-address"
+          />
+        </View>
+
+        <View style={styles.buttons}>
           <Pressable
-            style={[styles.btn, isFirstNameValid ? "" : styles.btnDisabled]}
-            onPress={() => viewPagerRef.current.setPage(1)}
-            disabled={!isFirstNameValid}
+            style={[styles.halfBtn, isSubmitEnabled ? "" : styles.btnDisabled]}
+            onPress={() => onboard({ firstName, lastName, email })}
+            disabled={!isSubmitEnabled}
           >
             <Text style={styles.btntext}>Next</Text>
           </Pressable>
         </View>
-        <View style={styles.page} key="2">
-          <View style={styles.pageContainer}>
-            <Text style={styles.text}>Last Name</Text>
-            <TextInput
-              style={styles.inputBox}
-              value={lastName}
-              onChangeText={onChangeLastName}
-              placeholder={"Last Name"}
-            />
-          </View>
-          <View style={styles.pageIndicator}>
-            <View style={styles.pageDot}></View>
-            <View style={[styles.pageDot, styles.pageDotActive]}></View>
-            <View style={styles.pageDot}></View>
-          </View>
-          <View style={styles.buttons}>
-            <Pressable
-              style={styles.halfBtn}
-              onPress={() => viewPagerRef.current.setPage(0)}
-            >
-              <Text style={styles.btntext}>Back</Text>
-            </Pressable>
-            <Pressable
-              style={[
-                styles.halfBtn,
-                isLastNameValid ? "" : styles.btnDisabled,
-              ]}
-              onPress={() => viewPagerRef.current.setPage(2)}
-              disabled={!isLastNameValid}
-            >
-              <Text style={styles.btntext}>Next</Text>
-            </Pressable>
-          </View>
-        </View>
-        <View style={styles.page} key="3">
-          <View style={styles.pageContainer}>
-            <Text style={styles.text}>Email</Text>
-            <TextInput
-              style={styles.inputBox}
-              value={email}
-              onChangeText={onChangeEmail}
-              placeholder={"Email"}
-              keyboardType="email-address"
-            />
-          </View>
-          <View style={styles.pageIndicator}>
-            <View style={styles.pageDot}></View>
-            <View style={styles.pageDot}></View>
-            <View style={[styles.pageDot, styles.pageDotActive]}></View>
-          </View>
-          <View style={styles.buttons}>
-            <Pressable
-              style={styles.halfBtn}
-              onPress={() => viewPagerRef.current.setPage(1)}
-            >
-              <Text style={styles.btntext}>Back</Text>
-            </Pressable>
-            <Pressable
-              style={[styles.halfBtn, isEmailValid ? "" : styles.btnDisabled]}
-              onPress={() => onboard({ firstName, lastName, email })}
-              disabled={!isEmailValid}
-            >
-              <Text style={styles.btntext}>Submit</Text>
-            </Pressable>
-          </View>
-        </View>
-      </PagerView>
+      </ScrollView>
     </KeyboardAvoidingView>
   );
 };
@@ -145,47 +87,36 @@ const Onboarding = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    paddingTop: Constants.statusBarHeight,
+    // paddingTop: Constants.statusBarHeight,
   },
-  header: {
-    padding: 12,
-    flexDirection: "row",
-    justifyContent: "center",
-    backgroundColor: "#dee3e9",
-  },
-  logo: {
-    height: 50,
-    width: 150,
-    resizeMode: "contain",
-  },
-  viewPager: {
+  scrollView: {
     flex: 1,
   },
   page: {
-    justifyContent: "center",
+    //justifyContent: "center",
   },
   pageContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    paddingTop: 20,
+    paddingHorizontal: 20,
+    // flex: 1,
+    // justifyContent: "center",
+    // alignItems: "center",
   },
   welcomeText: {
-    fontSize: 40,
-    paddingVertical: 60,
-    color: "#495E57",
-    textAlign: "center",
+    fontSize: 30,
+    color: Colors.secondary3,
   },
   text: {
     fontSize: 24,
-    color: "#495E57",
+    fontWeight: "bold",
+    color: Colors.secondary1,
   },
   inputBox: {
-    borderColor: "#EDEFEE",
-    backgroundColor: "#EDEFEE",
+    borderColor: Colors.secondary1,
+    backgroundColor: "#FFF",
     alignSelf: "stretch",
     height: 50,
-    margin: 18,
+    marginTop: 5,
     borderWidth: 1,
     padding: 10,
     fontSize: 20,
@@ -207,19 +138,22 @@ const styles = StyleSheet.create({
   buttons: {
     display: "flex",
     flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    justifyContent: "flex-end",
     marginLeft: 18,
     marginBottom: 60,
   },
   halfBtn: {
-    flex: 1,
+    // flex: 1,
+    justifyContent: "flex-end",
+    alignItems: "flex-end",
     borderColor: "#f4ce14",
     backgroundColor: "#f4ce14",
     borderRadius: 9,
-    alignSelf: "stretch",
+    // alignSelf: "stretch",
     marginRight: 18,
+    marginTop: 20,
     padding: 10,
+    paddingHorizontal: 20,
     borderWidth: 1,
   },
   btntext: {

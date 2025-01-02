@@ -173,7 +173,7 @@ const Home = ({ navigation }) => {
           </View>
           <Image
             style={styles.heroImage}
-            source={require("../assets/Hero image.png")}
+            source={require("../assets/Hero-image.png")}
             accessible={true}
             accessibilityLabel={"Little Lemon Food"}
           />

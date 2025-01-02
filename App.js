@@ -6,6 +6,8 @@ import Onboarding from "./screens/Onboarding";
 import Profile from "./screens/Profile";
 import Home from "./screens/Home";
 import { AuthContext } from "./contexts/AuthContext";
+import { Colors, Fonts } from "./theme";
+import LogoTitle, { BackIcon, TitleImage } from "./components/Title";
 
 const Stack = createNativeStackNavigator();
 
@@ -49,7 +51,7 @@ export default function App({ navigation }) {
 
   const authContext = useMemo(
     () => ({
-      onboard: async data => {
+      onboard: async (data) => {
         try {
           const jsonValue = JSON.stringify(data);
           await AsyncStorage.setItem("profile", jsonValue);
@@ -59,7 +61,7 @@ export default function App({ navigation }) {
 
         dispatch({ type: "onboard", isOnboardingCompleted: true });
       },
-      update: async data => {
+      update: async (data) => {
         try {
           const jsonValue = JSON.stringify(data);
           await AsyncStorage.setItem("profile", jsonValue);
@@ -85,7 +87,19 @@ export default function App({ navigation }) {
   return (
     <AuthContext.Provider value={authContext}>
       <NavigationContainer>
-        <Stack.Navigator>
+        <Stack.Navigator
+          screenOptions={{
+            headerStyle: {
+              backgroundColor: Colors.secondary3,
+              height: 100,
+            },
+            headerTintColor: Colors.primary1,
+            headerTitle: (props) => <TitleImage />,
+            // header: (props) => <LogoTitle {...props}/>,
+            headerBackButtonDisplayMode: "minimal",
+            // headerBackImageSource: require("./assets/back-icon.png"),
+          }}
+        >
           {state.isOnboardingCompleted ? (
             <>
               <Stack.Screen
@@ -99,7 +113,6 @@ export default function App({ navigation }) {
             <Stack.Screen
               name="Onboarding"
               component={Onboarding}
-              options={{ headerShown: false }}
             />
           )}
         </Stack.Navigator>
