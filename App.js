@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useReducer, useCallback } from "react";
+import { View } from 'react-native';
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -96,6 +97,7 @@ export default function App({ navigation }) {
             headerTintColor: Colors.primary1,
             headerTitle: (props) => <TitleImage />,
             // header: (props) => <LogoTitle {...props}/>,
+            headerBackground: () => <View style={{height: 100}} />,
             headerBackButtonDisplayMode: "minimal",
             headerBackTitleVisible: false,
             // headerBackImageSource: require("./assets/back-icon.png"),
