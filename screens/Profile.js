@@ -105,14 +105,7 @@ const Profile = () => {
       style={styles.container}
       behavior={Platform.OS === "ios" ? "padding" : "height"}
     >
-      <View style={styles.header}>
-        <Image
-          style={styles.logo}
-          source={require("../assets/Logo.png")}
-          accessible={true}
-          accessibilityLabel={"Little Lemon Logo"}
-        />
-      </View>
+      
       <ScrollView style={styles.viewScroll}>
         <Text style={styles.headertext}>Personal Information</Text>
         <Text style={styles.text}>Avatar</Text>
