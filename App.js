@@ -97,6 +97,7 @@ export default function App({ navigation }) {
             headerTitle: (props) => <TitleImage />,
             // header: (props) => <LogoTitle {...props}/>,
             headerBackButtonDisplayMode: "minimal",
+            headerBackTitleVisible: false,
             // headerBackImageSource: require("./assets/back-icon.png"),
           }}
         >
