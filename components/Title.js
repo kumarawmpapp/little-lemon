@@ -4,34 +4,34 @@ import Constants from "expo-constants";
 import { Colors } from "../theme";
 const LogoTitle = (props) => {
 
-  let backButton = null;
-  // const [rightButton, setRightButton] = useState();
-  let rightButton = null;
+  // let backButton = null;
+  const [rightButton, setRightButton] = useState();
+  // let rightButton = null;
+
+  // useLayoutEffect(() => {
+  //   if (props.navigation.canGoBack()) 
+  //     backButton =
+  //     <Pressable onPress={props.navigation.goBack()}>
+  //       <BackIcon />
+  //     </Pressable>;
+  // }, [props.back]);
 
   useLayoutEffect(() => {
-    if (props.navigation.canGoBack()) 
-      backButton =
-      <Pressable onPress={props.navigation.goBack()}>
-        <BackIcon />
-      </Pressable>;
-  }, [props.back]);
-
-  // useEffect(() => {
     const headerRight = props.options.headerRight;
 
     if (typeof headerRight === "function" ) {
-      // setRightButton(headerRight());
-      rightButton = headerRight();
+      setRightButton(headerRight());
+      // rightButton = headerRight();
     }
     
-  // }, [props.options.headerRight]);
+  }, [props.options.headerRight]);
   
   console.log(rightButton);
   
 
   return (
     <View style={styles.header}>
-      {backButton}
+      {/* {backButton} */}
 
       <TitleImage />
       {rightButton}
@@ -41,9 +41,11 @@ const LogoTitle = (props) => {
 
 const styles = StyleSheet.create({
   header: {
-    padding: 10,
-    marginTop: Constants.statusBarHeight,
+    // height: 100,
+    // marginBottom: -120,
+    paddingTop: Constants.statusBarHeight,
     paddingHorizontal: 20,
+    padding: 10,
     justifyContent: "space-between",
     alignItems: "center",
     flexDirection: "row",

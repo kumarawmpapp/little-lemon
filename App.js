@@ -96,11 +96,11 @@ export default function App({ navigation }) {
             },
             headerTintColor: Colors.primary1,
             headerTitle: (props) => <TitleImage />,
-            // header: (props) => <LogoTitle {...props}/>,
-            headerBackground: () => <View style={{height: 100}} />,
+            header: (props) => <LogoTitle {...props}/>,
+            headerMode: "screen",
             headerBackButtonDisplayMode: "minimal",
             headerBackTitleVisible: false,
-            // headerBackImageSource: require("./assets/back-icon.png"),
+            headerBackImageSource: require("./assets/back-icon.png"),
           }}
         >
           {state.isOnboardingCompleted ? (
