@@ -27,6 +27,9 @@ const ProfileAvatar = ({ onPress }) => {
     })();
   }, []);
 
+  const firstChar = profile.firstName ? Array.from(profile.firstName)[0] : '';
+  const secondChar = profile.lastName ? Array.from(profile.lastName)[0] : '';
+
   return (
     <Pressable
       onPress={() => {
@@ -39,8 +42,7 @@ const ProfileAvatar = ({ onPress }) => {
         ) : (
           // <View style={[styles.avatarEmpty]}>
           <Text style={styles.avatarEmptyText}>
-            {profile.firstName && Array.from(profile.firstName)[0]}
-            {profile.lastName && Array.from(profile.lastName)[0]}
+            {firstChar+secondChar}
           </Text>
           // </View>
         )}
